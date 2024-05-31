@@ -180,7 +180,7 @@ let computeForcesKernel;
 function initializeComputeForcesKernel(numStars) {
     // HZEJLI - 23/05/2024 - BEGIN
     console.log('init gpu')
-    const gpu = new GPU();
+    //const gpu = new GPU();
     // HZEJLI - 23/05/2024 - END
 
     // If a kernel already exists, destroy it
@@ -190,7 +190,7 @@ function initializeComputeForcesKernel(numStars) {
 
     // Initialize GPU instance if not already initialized or if destroyed
     // HZEJLI - 23/05/2024 - BEGIN
-    //const gpu = new GPU.GPU();
+    const gpu = new GPU.GPU();
     // HZEJLI - 23/05/2024 - END
     
     // Adjust the output size based on the number of stars
@@ -372,8 +372,10 @@ let galactR=20 //size of the galaxy in pixel
 let elips=1 // circular = 1 , full ellipse = 0.1 galaxy shape
 let speedRot=0.0000002 // scale of circular mouvement rad/year ? not sure 
 
-const canvasWidth = 2400;
-const canvasHeight = 2400;
+// HZEJLI - 31/05/2024
+// Graphic windows dimensions 
+const canvasWidth = 1000;
+const canvasHeight = 1000;
 const centerX = canvasWidth / 2;
 const centerY = canvasHeight / 2;
 //const scale = 200; // Scale factor to convert pixels to light years
@@ -493,11 +495,13 @@ function PlotResult() {
     const maxRadius = Math.max(...resultats.map(r => r[0]));
     const maxVelocity = Math.max(...resultats.map(r => r[1]));
 
+    // HZEJLI - 31/05/2024
+    // Coordinates of the graphic windows
     // Define the plot area
-    const plotX = centerX + 850;
-    const plotY = centerY - 1160;
-    const plotWidth = canvasWidth / 8;
-    const plotHeight = canvasHeight / 10;
+    const plotX = centerX + 800;
+    const plotY = centerY - 400;
+    const plotWidth = canvasWidth / 2;
+    const plotHeight = canvasHeight / 2;
 
     // Draw the plot area
     ctx.strokeStyle = 'red';
@@ -576,7 +580,7 @@ function PlotResult() {
     ctx.font = '16px Arial';
 
     // X-axis label
-    ctx.fillText('Distance from Galactic Center (kpc)', plotX + plotWidth / 2 - 100, plotY + plotHeight + 30); // Adjust positionn
+    ctx.fillText('Distance from Galactic Center (al)', plotX + plotWidth / 2 - 100, plotY + plotHeight + 30); // Adjust positionn
 
     // Y-axis label
     ctx.save();
